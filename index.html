@@ -6,12 +6,37 @@
   <link rel="stylesheet" href="styles/main.css">
   <title>New Title</title>
 </head>
-<body>
-  <h1>ToDo List</h1>
+<body ng-app="TodoApp">
+<nav class="navbar navbar-default" ng-controller="NavCtrl">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">TodoApp</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right" ng-repeat="thingy in navItems">
+        <li><a href="#">{{thingy.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
+  <div ng-controller="TodoCtrl">
+    <h1>ToDo List</h1>
+  </div>
+
+
+
+
+  <script type="text/javascript" src="lib/bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="lib/bower_components/angular/angular.min.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
 </body>
 </html>
