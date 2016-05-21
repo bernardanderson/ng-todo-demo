@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <title>New Title</title>
 </head>
@@ -40,7 +41,14 @@
           <h1>Todo List</h1>
           <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
-              <input type="text" placeholder="Search for..." ng-model="searchText" />
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default">Search
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </span>
+                <input class="form-control" type="text" placeholder="Search for..." ng-model="searchText" />
+              </div>
             </div>
           </div>
           <div ng-repeat="thingy in items | filter: searchText">
