@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="css/main.css">
   <title>New Title</title>
 </head>
 <body ng-app="TodoApp">
@@ -28,9 +28,24 @@
 </nav>
 
   <div ng-controller="TodoCtrl">
-    <h1>ToDo List</h1>
-  </div>
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <button class="col-xs-6 btn btn-success" ng-click="newItem()">New Item</button>
+        <button class="col-xs-6 btn btn-info" ng-click="allItem()">All Items</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 main-container">
+        <div class="col-xs-12" ng-show="showListView">
+          <h1>Todo List</h1>
+        </div>
 
+        <div class="col-xs-12" ng-show="!showListView">
+          <h1>New Todo</h1>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

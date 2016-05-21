@@ -9,6 +9,20 @@ app.controller("NavCtrl", function($scope){
 
 app.controller("TodoCtrl", function($scope){
   $scope.welcome = "Hello";
+  $scope.showListView = true;
+
+  $scope.newItem = function(){
+    $scope.showListView = false;
+  };
+
+  $scope.allItem = function(){
+    $scope.showListView = true;
+  };
+
+
+
+
+
 });
 
 
