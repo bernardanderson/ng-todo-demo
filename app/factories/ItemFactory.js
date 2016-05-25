@@ -33,6 +33,28 @@ app.factory("itemStorage", function($q, $http) {
     })
   }
 
-  return {getItemList:getItemList, deleteItem:deleteItem};
+  var postNewItem = function(newItem){
+        return $q(function(resolve, reject) {
+            $http.post(
+                "https://ba-todo.firebaseio.com/items/.json",
+                JSON.stringify({
+                    assignedTo: newItem.assignedTo,
+                    dependencies: newItem.dependencies,
+                    dueDate: newItem.dueDate,
+                    isCompleted: newItem.isCompleted,
+                    location: newItem.location,
+                    task: newItem.task,
+                    urgency: newItem.urgency
+                })
+            )
+            .success(
+                function(objectFromFirebase) {
+                    resolve(objectFromFirebase);
+                }
+            );
+        });
+      }
+
+  return {getItemList:getItemList, deleteItem:deleteItem, postNewItem:postNewItem}
 
 });
