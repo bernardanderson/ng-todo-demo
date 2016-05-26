@@ -15,5 +15,5 @@ app.controller("ItemListCtrl", function($scope, $http, itemStorage){
         $scope.items = itemCollection;
       });
     });
-  }
+  };
 });

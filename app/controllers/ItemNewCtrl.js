@@ -29,7 +29,7 @@ app.controller("ItemNewCtrl", function($scope, $http, $location){
       ).success(function(response) {
         $location.url("/items/list");
         console.log("The response is: ", response);
-      })
+      });
 
     // $scope.newTask.isCompleted = false;
     // $scope.newTask.id = $scope.items.length;
