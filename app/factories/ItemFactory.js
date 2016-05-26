@@ -89,10 +89,10 @@ app.factory("itemStorage", function($q, $http, firebaseURL) {
         });
   };
 
-  var updateItem = function(itemId, newItem){
+  var updateCompletedStatus = function(newItem){
         return $q(function(resolve, reject) {
             $http.put(
-                `${firebaseURL}/${itemId}.json`,
+                `${firebaseURL}${newItem.id}.json`,
                 JSON.stringify({
                     assignedTo: newItem.assignedTo,
                     dependencies: newItem.dependencies,
@@ -111,6 +111,6 @@ app.factory("itemStorage", function($q, $http, firebaseURL) {
         });
   };
 
-  return {updateItem:updateItem, getSingleItem:getSingleItem, getItemList:getItemList, deleteItem:deleteItem, postNewItem:postNewItem};
+  return {updateCompletedStatus:updateCompletedStatus, updateItem:updateItem, getSingleItem:getSingleItem, getItemList:getItemList, deleteItem:deleteItem, postNewItem:postNewItem};
 
 });
