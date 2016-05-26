@@ -8,18 +8,18 @@ app.factory("itemStorage", function($q, $http, firebaseURL) {
 
     return $q(function(resolve, reject){
 
-    $http.get(`${firebaseURL}.json`)
-    .success(function(itemCollection){
-      Object.keys(itemCollection).forEach(function(key){
-        itemCollection[key].id = key;
-        items.push(itemCollection[key]);
+      $http.get(`${firebaseURL}.json`)
+      .success(function(itemCollection){
+        Object.keys(itemCollection).forEach(function(key){
+          itemCollection[key].id = key;
+          items.push(itemCollection[key]);
+        });
+        resolve(items);
+      })
+      .error(function(error) {
+        reject(error);
       });
-      resolve(items);
-    })
-    .error(function(error) {
-      reject(error);
     });
-  });
   };
 
   var deleteItem = function(itemId){
@@ -53,8 +53,64 @@ app.factory("itemStorage", function($q, $http, firebaseURL) {
                 }
             );
         });
-      };
+  };
 
-  return {getItemList:getItemList, deleteItem:deleteItem, postNewItem:postNewItem};
+  var getSingleItem = function(itemId) {
+    return $q(function(resolve, reject){
+      $http.get(`${firebaseURL}/${itemId}.json`)
+      .success(function(itemObject){
+        resolve(itemObject);
+      })
+      .error(function(error) {
+        reject(error);
+      });
+    });
+  };
+
+  var updateItem = function(itemId, newItem){
+        return $q(function(resolve, reject) {
+            $http.put(
+                `${firebaseURL}/${itemId}.json`,
+                JSON.stringify({
+                    assignedTo: newItem.assignedTo,
+                    dependencies: newItem.dependencies,
+                    dueDate: newItem.dueDate,
+                    isCompleted: newItem.isCompleted,
+                    location: newItem.location,
+                    task: newItem.task,
+                    urgency: newItem.urgency
+                })
+            )
+            .success(
+                function(objectFromFirebase) {
+                    resolve(objectFromFirebase);
+                }
+            );
+        });
+  };
+
+  var updateItem = function(itemId, newItem){
+        return $q(function(resolve, reject) {
+            $http.put(
+                `${firebaseURL}/${itemId}.json`,
+                JSON.stringify({
+                    assignedTo: newItem.assignedTo,
+                    dependencies: newItem.dependencies,
+                    dueDate: newItem.dueDate,
+                    isCompleted: newItem.isCompleted,
+                    location: newItem.location,
+                    task: newItem.task,
+                    urgency: newItem.urgency
+                })
+            )
+            .success(
+                function(objectFromFirebase) {
+                    resolve(objectFromFirebase);
+                }
+            );
+        });
+  };
+
+  return {updateItem:updateItem, getSingleItem:getSingleItem, getItemList:getItemList, deleteItem:deleteItem, postNewItem:postNewItem};
 
 });
