@@ -1,47 +1,41 @@
 "use strict";
 
-app.controller("ItemNewCtrl", function($scope){
-  $scope.newTask = {};
+app.controller("ItemNewCtrl", function($scope, $http, $location){
+  $scope.newTask = {
+    assignedTo: "",
+    dependencies: "",
+    dueDate: "",
+    isCompleted: false,
+    location: "",
+    task: "",
+    urgency: ""
+  };
 
-  $scope.items = [
-    {
-      id: 0,
-      task: "mow the lawn",
-      isCompleted: true,
-      dueDate: "12/5/17",
-      assignedTo: "Greg",
-      location: "Zoe's House",
-      urgency: "Low",
-      dependencies: "sunshine, clippers, hat, water, headphones"
-    },
-    {
-      id: 1,
-      task: "Grade Quizzes",
-      isCompleted: true,
-      dueDate: "12/5/15",
-      assignedTo: "Joe",
-      location: "NSS",
-      urgency: "High",
-      dependencies: "WiFi, Tissues, Vodka"
-    },
-    {
-      id: 2,
-      task: "Take a Nap",
-      isCompleted: false,
-      dueDate: "12/5/15",
-      assignedTo: "Zoe",
-      location: "Her House",
-      urgency: "High",
-      dependencies: "Cat, Vodka"
-    }
-];
+  $scope.items = [];
 
   $scope.addNewItem = function() {
-    $scope.newTask.isCompleted = false;
-    $scope.newTask.id = $scope.items.length;
-    console.log("You added a new item", $scope.newTask);
-    $scope.items.push($scope.newTask);
-    console.log("You added a new item", $scope.items);
-    $scope.newTask = "";
+
+    $http.post(
+      "https://ba-todo.firebaseio.com/items.json", // url
+      JSON.stringify({ // data
+        assignedTo: $scope.newTask.assignedTo,
+        dependencies: $scope.newTask.dependencies,
+        dueDate: $scope.newTask.dueDate,
+        isCompleted: $scope.newTask.isCompleted,
+        location: $scope.newTask.location,
+        task: $scope.newTask.task,
+        urgency: $scope.newTask.urgency
+      })
+      ).success(function(response) {
+        $location.url("/items/list");
+        console.log("The response is: ", response);
+      })
+
+    // $scope.newTask.isCompleted = false;
+    // $scope.newTask.id = $scope.items.length;
+    // console.log("You added a new item", $scope.newTask);
+    // $scope.items.push($scope.newTask);
+    // console.log("You added a new item", $scope.items);
+    // $scope.newTask = "";
   };
 });
