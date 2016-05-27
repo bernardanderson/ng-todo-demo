@@ -1,6 +1,10 @@
 "use strict";
 
 app.controller("ItemNewCtrl", function($scope, $http, $location){
+
+  $scope.title = "New Item";
+  $scope.submitButtonText = "Add New Item";
+
   $scope.newTask = {
     assignedTo: "",
     dependencies: "",
@@ -29,13 +33,6 @@ app.controller("ItemNewCtrl", function($scope, $http, $location){
       ).success(function(response) {
         $location.url("/items/list");
         console.log("The response is: ", response);
-      })
-
-    // $scope.newTask.isCompleted = false;
-    // $scope.newTask.id = $scope.items.length;
-    // console.log("You added a new item", $scope.newTask);
-    // $scope.items.push($scope.newTask);
-    // console.log("You added a new item", $scope.items);
-    // $scope.newTask = "";
+      });
   };
 });

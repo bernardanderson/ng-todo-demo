@@ -1,6 +1,7 @@
 "use strict";
 
-var app = angular.module("TodoApp", ["ngRoute"]);
+var app = angular.module("TodoApp", ["ngRoute"])
+  .constant("firebaseURL", "https://ba-todo.firebaseio.com/items/");
 
 // $routeProvider is a method in ngRoute
 app.config(function($routeProvider) {
@@ -17,5 +18,9 @@ app.config(function($routeProvider) {
       templateUrl: "partials/item-details.html",
       controller: "ItemViewCtrl"
     }).
-    otherwise("/items/list")
-})
+    when("/items/:itemId/edit", {
+      templateUrl: "partials/item-new.html",
+      controller: "ItemEditCtrl"
+    }).
+    otherwise("/items/list");
+});

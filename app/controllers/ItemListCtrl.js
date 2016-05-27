@@ -15,5 +15,11 @@ app.controller("ItemListCtrl", function($scope, $http, itemStorage){
         $scope.items = itemCollection;
       });
     });
-  }
+  };
+
+  $scope.inputChange = function(item){
+    console.log(item.id);
+    itemStorage.updateCompletedStatus(item).then(function(reponse){})
+  };
+
 });
