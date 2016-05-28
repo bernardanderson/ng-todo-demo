@@ -9,6 +9,10 @@ app.controller("LoginCtrl", function($scope, $location, firebaseURL, AuthFactory
     password: ""
   };
 
+  if ($location.path() === "/logout") {
+    ref.unauth(); // Firebase method that gets rid of your login token
+  };
+
   $scope.register = () => {
     console.log("Register");
     ref.createUser({
