@@ -5,10 +5,10 @@ var app = angular.module("TodoApp", ["ngRoute"])
 
 let isAuth = (AuthFactory) => new Promise ((resolve, reject) => {
   if (AuthFactory.isAuthenticated()) {
-    console.log("User is NOT auth'ed")
+    console.log("User is auth'ed")
     resolve();
   } else {
-    console.log("User is auth'ed")
+    console.log("User is NOT auth'ed")
     reject();
   }
 })
