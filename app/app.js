@@ -6,6 +6,10 @@ var app = angular.module("TodoApp", ["ngRoute"])
 // $routeProvider is a method in ngRoute
 app.config(function($routeProvider) {
   $routeProvider.
+    when("/", {
+      templateUrl: "partials/item-list.html",
+      controller: "ItemListCtrl"
+    }).
     when("/items/list", {
       templateUrl: "partials/item-list.html",
       controller: "ItemListCtrl"
@@ -26,5 +30,5 @@ app.config(function($routeProvider) {
       templateUrl: "partials/login.html",
       controller: "LoginCtrl"
     }).
-    otherwise("/items/list");
+    otherwise("/");
 });
